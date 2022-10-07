@@ -1,0 +1,17 @@
+---
+- hosts: all
+  gather_facts: false
+  roles:
+    - role: local_accounts
+      accounts:
+        - name: 'local_adm'
+          shell: '/bin/bash'
+          uid: 38000087
+          expires: -1 # supported on GNU/Linux and FreeBSD
+          home: '/home/local_adm'
+          
+        - name: 'local_log'
+          shell: '/bin/sh'
+          uid: 38000088
+          expires: 1672531199 # supported on GNU/Linux and FreeBSD
+          home: '/home/local_log'
