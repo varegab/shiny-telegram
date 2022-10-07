@@ -1,0 +1,49 @@
+---
+# tasks file for local_accounts
+- name: generate ssh keys for the users if not exists
+  delegate_to: 127.0.0.1
+  ansible.builtin.shell:
+    cmd: |
+      if [ ! -e ./accounts/{{ item.name }}/id_rsa ] && [ ! -e ./accounts/{{ item.name }}/id_rsa.pub ]
+      then
+        mkdir -p ./accounts/{{ item.name }}
+        ssh-keygen -f ./accounts/{{ item.name }}/id_rsa
+      else
+        echo "Keys created already."
+      fi
+  loop: '{{ accounts }}'
+  register: output
+  run_once: true
+  become: no
+
+- name: create accounts on remote
+  ansible.builtin.user:
+    name: '{{ item.name }}'
+    shell: '{{ item.shell }}'
+    uid: '{{ item.uid }}'
+    expires: '{{ item.expires }}'
+    home: '{{ item.home }}'
+  loop: '{{ accounts }}'
+  become: yes
+
+- name: copy id_rsa.pub from ansible host to remote
+  ansible.builtin.copy:
+    src: './accounts/{{ item.name }}/id_rsa.pub'
+    dest: '{{ item.home }}/.ssh/authorized_keys'
+  loop: '{{ accounts }}'
+  become: yes
+
+- name: testing ssh connection
+  delegate_to: 127.0.0.1
+  ansible.builtin.shell:
+    cmd: |
+      ssh -o StrictHostKeyChecking=no -i ./accounts/{{ item.name }}/id_rsa {{ item.name }}@{{ inventory_hostname }} "hostname && whoami && uptime"
+  loop: "{{ accounts }}"
+  register: output
+
+- name: return previous output to debug
+  ansible.builtin.debug:
+    msg: "{{ item.stdout_lines }}"
+  loop: "{{ output.results }}"
+  loop_control:
+    label: ''

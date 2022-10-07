@@ -1,0 +1,10 @@
+---
+# tasks file for ssh_config
+- name: search and replace for texts
+  ansible.builtin.replace:
+    backup: yes
+    path: "{{ path }}"
+    regexp: '^#?{{ item.key }}\s+.*$'
+    replace: '{{ item.key }} {{ item.value }}'
+  loop: "{{ settings | dict2items }}"
+  become: yes
