@@ -11,10 +11,10 @@ Role Variables
 --------------
 
 settings
-# the list of keys we want to search for and their values.
+(the list of keys we want to search for and their values)
 
 path
-# the path of the file where we want to perfom the search and replace.
+(the path of the file where we want to perfom the search and replace)
 
 Dependencies
 ------------

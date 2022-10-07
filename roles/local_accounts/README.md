@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Create remote accounts and copy their public keys.
+local_accounts
 
 Requirements
 ------------
@@ -12,7 +12,7 @@ Role Variables
 --------------
 
 accounts 
-# a list of dictionaries which contains the user parameters.
+(a list of dictionaries which contains the user parameters)
 
 Dependencies
 ------------

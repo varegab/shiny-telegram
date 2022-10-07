@@ -14,7 +14,13 @@
   loop: '{{ accounts }}'
   register: output
   run_once: true
-  become: no
+
+- name: return previous output to debug
+  ansible.builtin.debug:
+    msg: "{{ item.stdout_lines }}"
+  loop: "{{ output.results }}"
+  loop_control:
+    label: ''
 
 - name: create accounts on remote
   ansible.builtin.user:
