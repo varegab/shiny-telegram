@@ -11,7 +11,8 @@ No requirements
 Role Variables
 --------------
 
-No role variables
+accounts 
+# a list of dictionaries which contains the user parameters.
 
 Dependencies
 ------------
@@ -21,11 +22,15 @@ No dependencies
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: all
-      roles:
-         - role: local_accounts
+- hosts: server
+  roles:
+    - role: local_accounts
+      accounts:
+        - name: 'user'
+          shell: '/bin/bash'
+          uid: 38000090
+          expires: -1 # supported on GNU/Linux and FreeBSD
+          home: '/home/user'
 
 License
 -------

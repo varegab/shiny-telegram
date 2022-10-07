@@ -1,7 +1,6 @@
 Role Name
 =========
-
-Replacing strings in sshd_config.
+sshd_config
 
 Requirements
 ------------
@@ -11,7 +10,11 @@ No requirements
 Role Variables
 --------------
 
-No role variables
+settings
+# the list of keys we want to search for and their values.
+
+path
+# the path of the file where we want to perfom the search and replace.
 
 Dependencies
 ------------
@@ -23,9 +26,14 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: all
-      roles:
-         - role: ssh_config
+- hosts: server
+  roles:
+    - role: ssh_config
+      settings:
+        PasswordAuthentication: "yes"
+        PermitEmptyPasswords: "no"
+        PermitRootLogin: "no"
+      path: /etc/ssh/sshd_config
 
 License
 -------
