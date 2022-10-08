@@ -2,7 +2,7 @@
 - hosts: 127.0.0.1
   gather_facts: false
   roles:
-    - role: ssh_config
+    - role: varegab.challenge.ssh_config
       settings:
         PasswordAuthentication: "yes"
         PermitEmptyPasswords: "no"

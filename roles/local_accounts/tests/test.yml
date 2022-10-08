@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   roles:
-    - role: local_accounts
+    - role: varegab.challenge.local_accounts
       accounts:
         - name: 'local_adm'
           shell: '/bin/bash'
