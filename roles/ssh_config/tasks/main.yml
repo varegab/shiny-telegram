@@ -1,11 +1,11 @@
 ---
 # tasks file for ssh_config
 - name: search and remove all keys from the file
-  ansible.builtin.lineinfile:
+  ansible.builtin.replace:
     backup: yes
     path: "{{ path }}"
     regexp: '^#?{{ item.key }}\s+.*$'
-    state: absent
+    replace: ''
   loop: "{{ settings | dict2items }}"
   become: yes
 
