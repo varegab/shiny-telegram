@@ -4,7 +4,7 @@
   ansible.builtin.replace:
     backup: yes
     path: "{{ path }}"
-    regexp: '^#?{{ item.key }}\s+.*$'
+    regexp: '^#*\s*{{ item.key }}\s*\S+'
     replace: ''
   loop: "{{ settings | dict2items }}"
   become: yes
