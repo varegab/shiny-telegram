@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+  roles:
+    - role: ssh_config
+      settings:
+        PasswordAuthentication: "yes"
+        PermitEmptyPasswords: "no"
+        PermitRootLogin: "no"
+      path: /etc/ssh/sshd_config

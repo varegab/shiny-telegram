@@ -1,10 +1,18 @@
 ---
 # tasks file for ssh_config
-- name: search and replace for texts
-  ansible.builtin.replace:
+- name: search and remove all keys from the file
+  ansible.builtin.lineinfile:
     backup: yes
     path: "{{ path }}"
     regexp: '^#?{{ item.key }}\s+.*$'
-    replace: '{{ item.key }} {{ item.value }}'
+    state: absent
   loop: "{{ settings | dict2items }}"
   become: yes
+
+- name: append the keys to the end of the file
+  ansible.builtin.lineinfile:
+    path: "{{ path }}"
+    line: "{{ item.key }} {{ item.value }}"
+  loop: "{{ settings | dict2items }}"
+  become: yes
+  notify: restart sshd service
