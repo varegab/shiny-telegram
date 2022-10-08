@@ -9,7 +9,7 @@ This test doing the following:
 To run the test, decrypt 'key.pem' first (the aws instances were created for this demo, so it is not 'sensitive' data per se).
 
 Decrypt:
-  ansible-vault decrypt key.pem (password: the company name that this challenge for with lowercase letters)
+  ansible-vault decrypt key.pem (password: the company name that this challenge is for with lowercase letters)
 
 Run:
   ansible-playbook -i hosts test.yml
