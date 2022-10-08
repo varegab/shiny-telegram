@@ -1,4 +1,4 @@
-This test doing the following:
+'test.yml':
 
 - It is looping through the 'accounts' list containing the dictionaries with user data we want to set up.
 - Creating local directories './accounts/username' if they do not exist already.
