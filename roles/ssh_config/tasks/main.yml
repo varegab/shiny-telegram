@@ -4,7 +4,7 @@
   ansible.builtin.lineinfile:
     backup: yes
     path: "{{ path }}"
-    regexp: '^#?{{ item.key }}\s+.*$'
+    regexp: '^#*\s*{{ item.key }}\s*\S+'
     state: absent
   loop: "{{ settings | dict2items }}"
   become: yes
