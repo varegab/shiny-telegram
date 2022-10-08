@@ -29,6 +29,7 @@
 # Authentication:
 
 #LoginGraceTime 2m
+#PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -53,6 +54,8 @@ AuthorizedKeysFile      .ssh/authorized_keys
 #IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
+#PasswordAuthentication yes
+#PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
 KbdInteractiveAuthentication no
@@ -111,6 +114,3 @@ Subsystem       sftp    /usr/lib/ssh/sftp-server
 #       AllowTcpForwarding no
 #       PermitTTY no
 #       ForceCommand cvs server
-PasswordAuthentication yes
-PermitEmptyPasswords no
-PermitRootLogin no
