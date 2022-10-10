@@ -21,3 +21,7 @@ Decrypt:
 Run:
   ansible-playbook -i hosts test_remote.yml
 
+
+PROBLEMS YET TO SOLVE:
+  - since the task unconditionally notifies the handler, the sshd service is always restarted.
+  - the 'backup: yes' directive of 'ansible.builtin.lineinfile' module creates a backup with every loop iteration.
